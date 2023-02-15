@@ -1,0 +1,98 @@
+<div style="margin-left: 600px; margin-right: 600px; height: 750px; padding-top: 20px; text-align: center; ">
+    <h1 style="text-align: center;">Sign up to our Portal</h1>
+    <form *ngIf="member != null" class="login100-form validate-form p-l-55 p-r-55 p-t-178" #signupForm="ngForm"
+        (ngSubmit)="validate(signupForm)" novalidate>
+        <div
+            style="background-color: white; padding: 20px; border-style: solid; border-color:#0f3274; border-radius: 10px; border-width: 1px; margin-bottom: 2px;">
+            <div class="input-group input-group-sm mb-2" data-validate="Please enter name" style="height: 36px;">
+                <span class="input-group-text" id="inputGroup-sizing-sm" style="width: 75px;">Name</span>
+                <input type="text" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-sm" id="name" name="name" ngModel required
+                    placeholder="Please enter name" #name="ngModel" [(ngModel)]="member.name" minlength="3"
+                    maxlength="20" pattern="[a-zA-Z ]*$" [disabled]="true">
+            </div>
+            <div class="input-group input-group-sm mb-2" data-validate="Please enter email of the user"
+                style="height: 36px;">
+                <span class="input-group-text" id="inputGroup-sizing-sm" style="width: 75px;">Email</span>
+                <input type="email" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-sm" id="email" name="email" ngModel required
+                    placeholder="Email of the User" #email="ngModel" [(ngModel)]="member.email"
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+            </div>
+            <div *ngIf="email.errors && (email.touched && email.invalid)" style="padding-bottom: 5px;">
+                <small class="text-danger" *ngIf="email.errors?.['required']">Email is required</small>
+                <small class="text-danger" *ngIf="email.errors?.['pattern']">Enter valid email adress</small>
+            </div>
+            <div class="input-group input-group-sm mb-2" data-validate="Please enter Country of the user"
+                style="height: 36px;">
+                <span class="input-group-text" id="inputGroup-sizing-sm" style="width: 75px;">Country</span>
+                <input type="text" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-sm" id="country" name="country" ngModel required
+                    placeholder="Country of the User" #country="ngModel" [(ngModel)]="member.country" minlength="3"
+                    maxlength="20" [disabled]="true">
+            </div>
+            <div class="input-group input-group-sm mb-2" data-validate="Please enter State of the user"
+                style="height: 36px;">
+                <span class="input-group-text" id="inputGroup-sizing-sm" style="width: 75px;">State</span>
+                <input type="text" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-sm" id="state" name="state" ngModel required
+                    placeholder="State of the User" #state="ngModel" [(ngModel)]="member.state" minlength="3"
+                    maxlength="20">
+            </div>
+            <div *ngIf="state.errors && (state.touched && state.invalid)" style="padding-bottom: 5px;">
+                <small class="text-danger" *ngIf="state.errors?.['required']">State is required</small>
+                <small class="text-danger" *ngIf="state.errors?.['minlength'] || state.errors?.['maxlength']">State must
+                    be at least 3-20 characters long</small>
+            </div>
+            <div class="input-group input-group-sm mb-2" data-validate="Please enter Address of the user"
+                style="height: 36px;">
+                <span class="input-group-text" id="inputGroup-sizing-sm" style="width: 75px;">Address</span>
+                <input type="text" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-sm" id="address" name="address" ngModel required
+                    placeholder="Address of the User" #address="ngModel" [(ngModel)]="member.address" minlength="3"
+                    maxlength="70">
+            </div>
+            <div *ngIf="address.errors && (address.touched && address.invalid)" style="padding-bottom: 5px;">
+                <small class="text-danger" *ngIf="address.errors?.['required']">Address is required</small>
+                <small class="text-danger"
+                    *ngIf="address.errors?.['minlength'] || address.errors?.['maxlength']">Address must be at least 3-70
+                    characters long</small>
+            </div>
+            <div class="input-group input-group-sm mb-2" data-validate="Please enter Pan of the user"
+                style="height: 36px;">
+                <span class="input-group-text" id="inputGroup-sizing-sm" style="width: 75px;">Pan</span>
+                <input type="text" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-sm" id="pan" name="pan" ngModel required
+                    placeholder="Pan of the User" #pan="ngModel" [(ngModel)]="member.pan"
+                    pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}">
+            </div>
+            <div *ngIf="pan.errors && (pan.touched && pan.invalid)" style="padding-bottom: 5px;">
+                <small class="text-danger" *ngIf="pan.errors?.['required']">PAN number is required</small>
+                <small class="text-danger" *ngIf="pan.errors?.['pattern']">Enter valid PAN number</small>
+            </div>
+            <div class="input-group input-group-sm mb-2" data-validate="Please enter Contact of the user"
+                style="height: 36px;">
+                <span class="input-group-text" id="inputGroup-sizing-sm" style="width: 75px;">Contact</span>
+                <input type="number" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-sm" id="contact" name="contact" ngModel required
+                    placeholder="Contact of the User" #contact="ngModel" [(ngModel)]="member.contact"
+                    pattern="[789][0-9]{9}">
+            </div>
+            <div *ngIf="contact.errors && (contact.touched && contact.invalid)" style="padding-bottom: 5px;">
+                <small class="text-danger" *ngIf="contact.errors?.['required']">Phone number is required</small>
+                <small class="text-danger" *ngIf="contact.errors?.['pattern']">Enter valid phone number</small>
+            </div>
+            <div class="input-group input-group-sm mb-2" data-validate="Please enter DOB of the user"
+                style="height: 36px;">
+                <span class="input-group-text" id="inputGroup-sizing-sm" style="width: 75px;">DOB</span>
+                <input type="date" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-sm" id="dob" name="dob" ngModel required
+                    placeholder="DOB of the User" #dob="ngModel" [(ngModel)]="member.dob" [disabled]="true">
+            </div>
+            <button class="login100-form-btn" type="submit" [disabled]="signupForm.invalid">
+                Update
+            </button>
+        </div>
+    </form>
+
+</div>

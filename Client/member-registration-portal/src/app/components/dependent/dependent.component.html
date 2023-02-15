@@ -1,0 +1,79 @@
+<div class="container" *ngIf="!editDependentFlag && !addDependentFlag" style="margin-left: 25%; height: 750px; padding-top: 20px;">
+    <ol class="list-group list-group-numbered" style="width: 70%;">
+        <h1 style="text-align: center;">Dependents</h1>
+        <li *ngFor="let dependent of dependents; let i = index"
+            class="list-group-item d-flex justify-content-between align-items-start" style="border-color:#0f3274;">
+            <div class="ms-2 me-auto">
+                <div class=""><b>{{dependent.name | uppercase}}</b></div>
+                DOB: {{dependent.dob}}
+            </div>
+            <button class="btn btn-outline-primary" type="submit" (click)="editDependent(dependent.dependentId)"
+                style="margin-right: 5px;">
+                Edit
+            </button>
+            <button class="btn btn-outline-danger" type="submit" (click)="deleteDependent(dependent.dependentId, i)"
+                style="margin-right: 5px;">
+                Delete
+            </button>
+        </li>
+        <div *ngIf="dependents && dependents.length == 0" class="alert alert-danger" role="alert">No Dependents Found
+        </div>
+    </ol>
+    <button *ngIf="dependents && dependents.length < 2"  class="btn btn-outline-primary" type="submit" (click)="setAddDependentFlag()"
+    style="margin-top: 10px;">
+    + Add Dependent
+</button>
+</div>
+
+<div style="margin-left: 600px; margin-right: 600px; height: 750px; padding-top: 20px; text-align: center; "
+    *ngIf="editDependentFlag && !addDependentFlag">
+    <h1 style="text-align: center;">Edit a Dependent</h1>
+    <form name="editDependentForm" #editDependentForm="ngForm" (ngSubmit)="validate(editDependentForm)" novalidate>
+        <div class="input-group input-group-sm mb-2" data-validate="Please enter DOB of the user" style="height: 36px;">
+            <span class="input-group-text" id="inputGroup-sizing-sm" style="width: 115px;">DOB</span>
+            <input type="date" class="form-control" aria-label="Sizing example input"
+                aria-describedby="inputGroup-sizing-sm" id="dob" name="dob" ngModel required
+                placeholder="DOB of the User" #dob="ngModel" [(ngModel)]="dependent.dob">
+        </div>
+        <div class="container-login100-form-btn m-b-30">
+            <button class="login100-form-btn" type="submit" [disabled]="!editDependentForm.valid">
+                Update
+            </button>
+        </div>
+    </form>
+</div>
+
+<div style="margin-left: 600px; margin-right: 600px; height: 750px; padding-top: 20px; text-align: center; "
+    *ngIf="addDependentFlag && !editDependentFlag">
+    <h1 style="text-align: center;">Edit a Dependent</h1>
+    <form name="addDependentForm" #addDependentForm="ngForm" (ngSubmit)="addDependent(addDependentForm)" novalidate>
+        <div
+            style="background-color: white; padding: 20px; border-style: solid; border-color:#0f3274; border-radius: 10px; border-width: 1px; margin-bottom: 2px;">
+            <div class="input-group input-group-sm mb-2" data-validate="Please enter name" style="height: 36px;">
+                <span class="input-group-text" id="inputGroup-sizing-sm" style="width: 75px;">Name</span>
+                <input type="text" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-sm" id="name" name="name" ngModel required
+                    placeholder="Please enter name" #name="ngModel" [(ngModel)]="newDependent.name" minlength="3"
+                    maxlength="20" pattern="[a-zA-Z ]*$">
+            </div>
+            <div *ngIf="(name.errors && name.touched && name.invalid)" style="padding-bottom: 5px;">
+                <small class="text-danger" *ngIf="name.errors?.['required']">Name is required</small>
+                <small class="text-danger" *ngIf="name.errors?.['pattern']">Name should should contain only alphabets and space</small>
+                <small class="text-danger" *ngIf="name.errors?.['minlength'] || name.errors?.['maxlength']">Name must be
+                    at least 3-20 characters long</small>
+            </div>
+            <div class="input-group input-group-sm mb-2" data-validate="Please enter DOB of the user"
+                style="height: 36px;">
+                <span class="input-group-text" id="inputGroup-sizing-sm" style="width: 75px;">DOB</span>
+                <input type="date" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-sm" id="dob" name="dob" ngModel required
+                    placeholder="DOB of the User" #dob="ngModel" [(ngModel)]="newDependent.dob">
+            </div>
+            <div class="container-login100-form-btn m-b-30">
+                <button class="login100-form-btn" type="submit" [disabled]="!addDependentForm.valid">
+                    Add
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

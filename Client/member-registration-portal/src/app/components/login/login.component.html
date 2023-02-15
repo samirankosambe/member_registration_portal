@@ -1,0 +1,32 @@
+<div style="margin-left: 600px; margin-right: 600px; height: 750px; padding-top: 20px;  text-align: center;">
+    <form *ngIf="!isLoggedIn" #loginForm="ngForm" (ngSubmit)="validate(loginForm)" novalidate>
+        <h1 style="text-align: center;">Sign in as Member</h1>
+        <div
+            style="align-self: auto; display: block; border-style: solid; border-color:#0f3274; border-radius: 10px; border-width: 1px;">
+            <label for="username"> Username</label>
+            <br>
+            <div data-validate="Please enter username">
+                <input type="text" id="username" name="username" ngModel required #username="ngModel" minlength="3"
+                    maxlength="20">
+            </div>
+            <label for="password"> Password</label>
+            <br>
+            <div data-validate="Please enter password">
+                <input class="input100" type="password" id="password" name="password" ngModel required
+                    #password="ngModel" minlength="6" maxlength="20">
+            </div>
+            <button class="login100-form-btn" type="submit" style="display:grid;" [disabled]="!loginForm.valid">
+                Sign In
+            </button>
+        </div>
+
+        <div class="flex-col-c p-t-27 p-b-40">
+            <span class="txt1 p-b-9">
+                Don’t have an account?
+            </span>
+            <a class="txt3" routerLink="../signup">Sign up now
+            </a>
+        </div>
+    </form>
+
+</div>

@@ -1,0 +1,29 @@
+.login100-form-btn[disabled]{pointer-events:none;cursor:not-allowed;background-color: lightsteelblue;}
+.login100-form-btn {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20%;
+    height: 30px;
+    background-color: #0f3274;
+    border-radius: 25px; 
+    font-family: Ubuntu-Bold;
+    font-size: 15px;
+    color: #fff;
+    line-height: 1.2;
+    text-transform: uppercase;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+    border: none;
+    justify-content: center;
+    position: relative;
+    left: 40%;
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }

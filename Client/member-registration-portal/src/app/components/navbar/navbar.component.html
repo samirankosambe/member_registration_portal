@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #0f3274; padding-left: 20px;">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="" [ngClass]="{active:navSelected == ''}" (click)="navSelected=''">Member
+      Registration Portal</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="" [ngClass]="{active:navSelected == ''}"
+            (click)="navSelected=''">Home</a>
+        </li>
+        <li class="nav-item" *ngIf="isLoggedIn()">
+          <a class="nav-link" routerLink="submit" [ngClass]="{active:navSelected == 'submit'}"
+            (click)="navSelected='submit'">Submit Claim</a>
+        </li>
+        <li class="nav-item" *ngIf="isLoggedIn()">
+          <a class="nav-link" routerLink="claims" [ngClass]="{active:navSelected == 'claims'}"
+            (click)="navSelected='claims'">Claims</a>
+        </li>
+        <li class="nav-item" *ngIf="isLoggedIn()">
+          <a class="nav-link" routerLink="dependent" [ngClass]="{active:navSelected == 'dependent'}"
+            (click)="navSelected='dependent'">Dependent</a>
+        </li>
+        <li class="nav-item" *ngIf="isLoggedIn()">
+          <a class="nav-link" routerLink="edit" [ngClass]="{active:navSelected == 'edit'}"
+            (click)="navSelected='edit'">Edit Profile</a>
+        </li>
+      </ul>
+      <button type="button" *ngIf="!isLoggedIn()" class="btn btn-outline-light" routerLink="signup">Sign Up</button>
+      <button type="button" *ngIf="!isLoggedIn()" class="btn btn-outline-light" routerLink="login"
+        style="margin-left: 10px;">Sign In</button>
+      <a routerLink="edit" style="color: white; margin-right: 10px; text-decoration: none;" *ngIf="isLoggedIn()">@{{username}}</a>
+      <button type="button" *ngIf="isLoggedIn()" class="btn btn-danger" (click)="logout()">Logout</button>
+    </div>
+  </div>
+</nav>

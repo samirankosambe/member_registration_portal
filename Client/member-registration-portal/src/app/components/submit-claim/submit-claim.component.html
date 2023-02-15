@@ -1,0 +1,76 @@
+<div style="margin-left: 600px; margin-right: 600px; height: 750px; padding-top: 20px; text-align: center; ">
+    <h1 style="text-align: center;">Add a Claim</h1>
+    <form class="login100-form validate-form p-l-55 p-r-55 p-t-178" #submitForm="ngForm"
+        (ngSubmit)="validate(submitForm)" novalidate>
+        <div
+            style="background-color: white; padding: 20px; border-style: solid; border-color:#0f3274; border-radius: 10px; border-width: 1px; margin-bottom: 2px;">
+            <div class="input-group input-group-sm mb-2" data-validate="Please enter name" style="height: 36px;">
+                <span class="input-group-text" id="inputGroup-sizing-sm" style="width: 115px;">Name</span>
+                <input type="text" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-sm" id="name" name="name" ngModel required
+                    placeholder="Please enter name" #name="ngModel" [(ngModel)]="claim.name" minlength="3"
+                    maxlength="20" pattern="[a-zA-Z ]*$" (input)="checkName(name.value)" (focusout)="checkName(name.value)">
+            </div>
+            <small class="text-danger" *ngIf="!nameValidated && name.touched">Name should be similar to member name or dependent name</small>
+            <div class="input-group input-group-sm mb-2" data-validate="Please enter DOB of the user"
+                style="height: 36px;">
+                <span class="input-group-text" id="inputGroup-sizing-sm" style="width: 115px;">DOB</span>
+                <input type="date" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-sm" id="dob" name="dob" ngModel required
+                    placeholder="DOB of the User" #dob="ngModel" [(ngModel)]="claim.dob" [disabled]="true">
+            </div>
+            <small class="text-danger" *ngIf="!dobValidated" style="padding-bottom: 5px;">DOB should be less than
+                Current date</small>
+
+            <div class="input-group input-group-sm mb-2" data-validate="Please enter admission date of the user"
+                style="height: 36px;">
+                <span class="input-group-text" id="inputGroup-sizing-sm" style="width: 115px;">Admission Date</span>
+                <input type="date" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-sm" id="admissionDate" name="admissionDate" ngModel required
+                    placeholder="Admission date of the User" #admissionDate="ngModel" [(ngModel)]="claim.admissionDate">
+            </div>
+            <div class="input-group input-group-sm mb-2" data-validate="Please enter dischargeDate of the user"
+                style="height: 36px;">
+                <span class="input-group-text" id="inputGroup-sizing-sm" style="width: 115px;">Discharge Date</span>
+                <input type="date" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-sm" id="dischargeDate" name="dischargeDate" ngModel required
+                    placeholder="Discharge date of the User" #dischargeDate="ngModel" [(ngModel)]="claim.dischargeDate"
+                    (input)="checkDates(admissionDate.value, dischargeDate.value)">
+            </div>
+
+            <small class="text-danger" *ngIf="!dateValidated" style="padding-bottom: 5px;">Discharge date should be
+                greater than Admission date</small>
+
+            <div class="input-group input-group-sm mb-2" data-validate="Please enter provider of the user"
+                style="height: 36px;">
+                <span class="input-group-text" id="inputGroup-sizing-sm" style="width: 115px;">Provider</span>
+                <input type="text" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-sm" id="provider" name="provider" ngModel required
+                    placeholder="Please enter provider" #provider="ngModel" [(ngModel)]="claim.provider" minlength="3"
+                    maxlength="20">
+            </div>
+            <div *ngIf="provider.errors && (provider.touched && provider.invalid)" style="padding-bottom: 5px;">
+                <small class="text-danger" *ngIf="provider.errors?.['required']">Provider is required</small>
+                <small class="text-danger"
+                    *ngIf="provider.errors?.['minlength'] || provider.errors?.['maxlength']">Provider must
+                    be at least 3-20 characters long</small>
+            </div>
+            <div class="input-group input-group-sm mb-2" data-validate="Please enter total bill of the user"
+                style="height: 36px;">
+                <span class="input-group-text" id="inputGroup-sizing-sm" style="width: 115px;">Total Bill</span>
+                <input type="number" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-sm" id="totalBill" name="totalBill" ngModel required
+                    placeholder="Please enter totalBill" #totalBill="ngModel" [(ngModel)]="claim.totalBill">
+            </div>
+            <div *ngIf="totalBill.value <= 0 && totalBill.touched" style="padding-bottom: 5px;">
+                <small class="text-danger" *ngIf="totalBill.value <= 0">Total bill should be greate than zero</small>
+            </div>
+
+            <button class="login100-form-btn" type="submit"
+                [disabled]="submitForm.invalid || nameValidated || !dateValidated || totalBill.value <= 0">
+                Add Claim
+            </button>
+        </div>
+    </form>
+
+</div>
