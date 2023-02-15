@@ -14,7 +14,8 @@
             <div *ngIf="(name.errors && name.touched && name.invalid) || memberExists" style="padding-bottom: 5px;">
                 <small class="text-danger" *ngIf="name.errors?.['required']">Name is required</small>
                 <small class="text-danger" *ngIf="memberExists">Name already exists</small>
-                <small class="text-danger" *ngIf="name.errors?.['pattern']">Name should should contain only alphabets and space</small>
+                <small class="text-danger" *ngIf="name.errors?.['pattern']">Name should should contain only alphabets
+                    and space</small>
                 <small class="text-danger" *ngIf="name.errors?.['minlength'] || name.errors?.['maxlength']">Name must be
                     at least 3-20 characters long</small>
             </div>
@@ -38,38 +39,39 @@
                     placeholder="Address of the User" #address="ngModel" [(ngModel)]="member.address" minlength="3"
                     maxlength="70">
             </div>
-            <div class="input-group input-group-sm mb-2" data-validate="Please enter Country of the user"
-                style="height: 36px;">
-                <span class="input-group-text" id="inputGroup-sizing-sm" style="width: 75px;">Country</span>
-                <input type="text" class="form-control" aria-label="Sizing example input"
-                    aria-describedby="inputGroup-sizing-sm" id="country" name="country" ngModel required
-                    placeholder="Country of the User" #country="ngModel" [(ngModel)]="member.country" minlength="3"
-                    maxlength="20">
-            </div>
-            <div *ngIf="country.errors && (country.touched && country.invalid)" style="padding-bottom: 5px;">
-                <small class="text-danger" *ngIf="country.errors?.['required']">Country is required</small>
-                <small class="text-danger"
-                    *ngIf="country.errors?.['minlength'] || country.errors?.['maxlength']">Country must be at least 3-20
-                    characters long</small>
-            </div>
-            <div class="input-group input-group-sm mb-2" data-validate="Please enter State of the user"
-                style="height: 36px;">
-                <span class="input-group-text" id="inputGroup-sizing-sm" style="width: 75px;">State</span>
-                <input type="text" class="form-control" aria-label="Sizing example input"
-                    aria-describedby="inputGroup-sizing-sm" id="state" name="state" ngModel required
-                    placeholder="State of the User" #state="ngModel" [(ngModel)]="member.state" minlength="3"
-                    maxlength="20">
-            </div>
-            <div *ngIf="state.errors && (state.touched && state.invalid)" style="padding-bottom: 5px;">
-                <small class="text-danger" *ngIf="state.errors?.['required']">State is required</small>
-                <small class="text-danger" *ngIf="state.errors?.['minlength'] || state.errors?.['maxlength']">State must
-                    be at least 3-20 characters long</small>
-            </div>
             <div *ngIf="address.errors && (address.touched && address.invalid)" style="padding-bottom: 5px;">
                 <small class="text-danger" *ngIf="address.errors?.['required']">Address is required</small>
                 <small class="text-danger"
                     *ngIf="address.errors?.['minlength'] || address.errors?.['maxlength']">Address must be at least 3-70
                     characters long</small>
+            </div>
+
+            <div class="input-group input-group-sm mb-2" data-validate="Please enter Country of the user"
+                style="height: 36px;">
+                <span class="input-group-text" id="inputGroup-sizing-sm" style="width: 75px;">Country</span>
+                <select id="country" name="country" aria-label="Sizing example input" class="form-control"
+                    aria-describedby="inputGroup-sizing-sm" ngmodel #country="ngModel" [(ngModel)]="member.country"
+                    (change)="onCountryChange($event)" required>
+                    <option *ngFor="let country of countries" [value]="country.shortName">
+                        {{ country.name }}
+                    <option>
+                </select>
+            </div>
+            <div *ngIf="country.errors && (country.touched && country.invalid)" style="padding-bottom: 5px;">
+                <small class="text-danger" *ngIf="country.errors?.['required']">Country is required</small>
+            </div>
+            <div class="input-group input-group-sm mb-2" data-validate="Please enter State of the user"
+                style="height: 36px;">
+                <span class="input-group-text" id="inputGroup-sizing-sm" style="width: 75px;">State</span>
+                <select id="State" name="State" aria-label="Sizing example input" class="form-control"
+                    aria-describedby="inputGroup-sizing-sm" ngmodel #state="ngModel" [(ngModel)]="member.state" required>
+                    <option *ngFor="let state of states" [value]="state">
+                        {{ state }}
+                    <option>
+                </select>
+            </div>
+            <div *ngIf="state.errors && (state.touched && state.invalid)" style="padding-bottom: 5px;">
+                <small class="text-danger" *ngIf="state.errors?.['required']">State is required</small>
             </div>
             <div class="input-group input-group-sm mb-2" data-validate="Please enter Pan of the user"
                 style="height: 36px;">
@@ -100,11 +102,14 @@
                 <span class="input-group-text" id="inputGroup-sizing-sm" style="width: 75px;">DOB</span>
                 <input type="date" class="form-control" aria-label="Sizing example input"
                     aria-describedby="inputGroup-sizing-sm" id="dob" name="dob" ngModel required
-                    placeholder="DOB of the User" #dob="ngModel" [(ngModel)]="member.dob" (input) = "validateDate(dob.value)" (input) = "checkDOB(dob.value)" (focusout) = "checkDOB(dob.value)">
+                    placeholder="DOB of the User" #dob="ngModel" [(ngModel)]="member.dob"
+                    (input)="validateDate(dob.value)" (input)="checkDOB(dob.value)" (focusout)="checkDOB(dob.value)">
             </div>
-            <small class="text-danger" *ngIf="!dobValidated" style="padding-bottom: 5px;">DOB should be less than Current date</small>
-            <small class="text-danger" *ngIf="validAge < 18" style="padding-bottom: 5px;">Age should be more than 18</small>
-            
+            <small class="text-danger" *ngIf="!dobValidated" style="padding-bottom: 5px;">DOB should be less than
+                Current date</small>
+            <small class="text-danger" *ngIf="validAge < 18" style="padding-bottom: 5px;">Age should be more than
+                18</small>
+
             <div class="input-group input-group-sm mb-2" data-validate="Please enter password" style="height: 36px;">
                 <span class="input-group-text" id="inputGroup-sizing-sm" style="width: 75px;">Password</span>
                 <input type="password" class="form-control" aria-label="Sizing example input"
@@ -114,10 +119,12 @@
             </div>
             <div *ngIf="password.errors && (password.touched && password.invalid)" style="padding-bottom: 5px;">
                 <small class="text-danger" *ngIf="password.errors?.['required']">password is required</small>
-                <small class="text-danger" *ngIf="password.errors?.['minlength'] || password.errors?.['maxlength']">Password must
+                <small class="text-danger"
+                    *ngIf="password.errors?.['minlength'] || password.errors?.['maxlength']">Password must
                     be at least 6-20 characters long</small>
             </div>
-            <button class="login100-form-btn" type="submit" [disabled]="signupForm.invalid || memberExists || !dobValidated || dob.pristine || validAge < 18 ">
+            <button class="login100-form-btn" type="submit"
+                [disabled]="signupForm.invalid || memberExists || !dobValidated || dob.pristine || validAge < 18 ">
                 Sign Up
             </button>
             <div class="flex-col-c p-t-27 p-b-40">

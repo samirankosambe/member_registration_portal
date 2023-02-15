@@ -5,6 +5,12 @@ import { Member } from 'src/app/entity/member';
 import { CountryService } from 'src/app/services/country.service';
 import { RegistrationService } from 'src/app/services/registration.service';
 
+
+interface Country {
+  shortName: string;
+  name: string;
+}
+
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -21,6 +27,8 @@ export class SignupComponent implements OnInit {
   exisitngMember: any = new Member();
   validAge: number = 18;
   dobValidated = true;
+  countries: Country[];
+  states: string[];
 
   onValueChange(name: any) {
     const promise = this.registrationService.findMemberByName(name.target.value);
@@ -38,8 +46,6 @@ export class SignupComponent implements OnInit {
   checkDOB(dob: Date) {
     let currentDate = new Date();
     let date = new Date(dob);
-    console.log(date);
-
     if ((date.getDate() >= currentDate.getDate()) && (date.getMonth() >= currentDate.getMonth()) && (date.getFullYear() >= currentDate.getFullYear())) {
       this.dobValidated = false;
     }
@@ -80,7 +86,19 @@ export class SignupComponent implements OnInit {
 
     });
   }
-  constructor(private registrationService: RegistrationService, private router: Router, private countryService: CountryService) { }
+
+  onCountryChange(event){
+    var country = event.target.value;
+    if (country) {
+      this.states = this.countryService.getStatesByCountry(country);
+      this.member.state = "";
+    }
+  }
+
+  constructor(private registrationService: RegistrationService, private router: Router, private countryService: CountryService) { 
+    this.countries = this.countryService.getCountries();
+  }
+
 
   ngOnInit() {
   }

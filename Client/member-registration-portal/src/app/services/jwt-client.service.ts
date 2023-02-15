@@ -31,6 +31,13 @@ export class JwtClientService {
     window.sessionStorage.setItem('memberid', memberId);
   }
 
+  public setCountry(country: string) {
+    window.sessionStorage.setItem('country', country);
+  }
+
+  public getCountry() {
+    return window.sessionStorage.getItem('country');
+  }
 
   isLoggedIn(role) {
     let token = this.getToken();

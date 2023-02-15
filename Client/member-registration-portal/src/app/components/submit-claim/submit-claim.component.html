@@ -65,9 +65,8 @@
             <div *ngIf="totalBill.value <= 0 && totalBill.touched" style="padding-bottom: 5px;">
                 <small class="text-danger" *ngIf="totalBill.value <= 0">Total bill should be greate than zero</small>
             </div>
-
             <button class="login100-form-btn" type="submit"
-                [disabled]="submitForm.invalid || nameValidated || !dateValidated || totalBill.value <= 0">
+                [disabled]="submitForm.invalid || !nameValidated || !dateValidated || totalBill.value <= 0">
                 Add Claim
             </button>
         </div>

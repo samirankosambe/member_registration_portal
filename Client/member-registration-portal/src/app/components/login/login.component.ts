@@ -34,6 +34,7 @@ export class LoginComponent {
       this.jwtService.setToken(response.jwtToken);
       this.jwtService.setMemberid(response.member.memberId);
       this.jwtService.setName(response.member.name);
+      this.jwtService.setCountry(response.member.country);
       this.router.navigate(['submit']);
 
     }, (error) => {

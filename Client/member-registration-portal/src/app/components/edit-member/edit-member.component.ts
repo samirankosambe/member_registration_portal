@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Member } from 'src/app/entity/member';
+import { CountryService } from 'src/app/services/country.service';
 import { JwtClientService } from 'src/app/services/jwt-client.service';
 import { RegistrationService } from 'src/app/services/registration.service';
 
@@ -12,6 +13,7 @@ import { RegistrationService } from 'src/app/services/registration.service';
 })
 export class EditMemberComponent {
   member: Member;
+  states: string[];
 
   validate(signupForm) {
     if (signupForm.valid) {
@@ -31,17 +33,20 @@ export class EditMemberComponent {
     
     
   }
-  constructor(private registrationService: RegistrationService, private router: Router, private jwtService: JwtClientService) { 
-    
-  }
-
-  ngOnInit() {
+  constructor(private registrationService: RegistrationService, private router: Router, private jwtService: JwtClientService, private countryService: CountryService) { 
     const promise = this.registrationService.findMemberByName(this.jwtService.getName());
     promise.subscribe((response: any) => {
       this.member = response;
     }, (error) => {
       console.log(error);
-      
     });
+  }
+
+  ngOnInit() {
+    
+    if (this.jwtService.getCountry()) {
+      this.states = this.countryService.getStatesByCountry(this.jwtService.getCountry());
+    }
+    
   }
 }
