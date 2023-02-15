@@ -34,7 +34,7 @@ export class RegistrationService {
     });
   }
 
-  updateMember(member){
+  updateMember(member) {
     return this.http.put(BASE_URL + "/update-member", member, { responseType: "text" });
   }
 
@@ -46,11 +46,11 @@ export class RegistrationService {
     return this.http.post(BASE_URL + "/add-dependent", dependent, { responseType: "text" })
   }
 
-  updateDependent(dependent){
+  updateDependent(dependent) {
     return this.http.put(BASE_URL + "/update-dependent", dependent, { responseType: "text" });
   }
 
-  deleteDependent(dependentId){
+  deleteDependent(dependentId) {
     return this.http.delete(BASE_URL + "/delete-dependent/" + dependentId);
   }
 

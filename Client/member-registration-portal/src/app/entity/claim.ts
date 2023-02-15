@@ -1,4 +1,4 @@
-export class Claim{
+export class Claim {
     claimId: string = "";
     name: string = "";
     memberName: string = "";

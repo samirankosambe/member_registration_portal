@@ -30,10 +30,8 @@ export class EditMemberComponent {
       console.log(error);
       alert('something is wrong, try again');
     });
-    
-    
   }
-  constructor(private registrationService: RegistrationService, private router: Router, private jwtService: JwtClientService, private countryService: CountryService) { 
+  constructor(private registrationService: RegistrationService, private router: Router, private jwtService: JwtClientService, private countryService: CountryService) {
     const promise = this.registrationService.findMemberByName(this.jwtService.getName());
     promise.subscribe((response: any) => {
       this.member = response;
@@ -43,10 +41,9 @@ export class EditMemberComponent {
   }
 
   ngOnInit() {
-    
     if (this.jwtService.getCountry()) {
       this.states = this.countryService.getStatesByCountry(this.jwtService.getCountry());
     }
-    
+
   }
 }

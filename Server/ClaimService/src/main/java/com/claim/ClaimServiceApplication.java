@@ -7,13 +7,13 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 public class ClaimServiceApplication {
-	public static void main(String[] args) {
-		SpringApplication.run(ClaimServiceApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(ClaimServiceApplication.class, args);
+    }
 
-	@Bean
-	public RestTemplate restTemplate() {
-		return new RestTemplate();
-	}
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
 
 }

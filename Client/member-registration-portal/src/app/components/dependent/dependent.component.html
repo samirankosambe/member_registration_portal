@@ -1,4 +1,5 @@
-<div class="container" *ngIf="!editDependentFlag && !addDependentFlag" style="margin-left: 25%; height: 750px; padding-top: 20px;">
+<div class="container" *ngIf="!editDependentFlag && !addDependentFlag"
+    style="margin-left: 25%; height: 750px; padding-top: 20px;">
     <ol class="list-group list-group-numbered" style="width: 70%;">
         <h1 style="text-align: center;">Dependents</h1>
         <li *ngFor="let dependent of dependents; let i = index"
@@ -19,10 +20,10 @@
         <div *ngIf="dependents && dependents.length == 0" class="alert alert-danger" role="alert">No Dependents Found
         </div>
     </ol>
-    <button *ngIf="dependents && dependents.length < 2"  class="btn btn-outline-primary" type="submit" (click)="setAddDependentFlag()"
-    style="margin-top: 10px;">
-    + Add Dependent
-</button>
+    <button *ngIf="dependents && dependents.length < 2" class="btn btn-outline-primary" type="submit"
+        (click)="setAddDependentFlag()" style="margin-top: 10px;">
+        + Add Dependent
+    </button>
 </div>
 
 <div style="margin-left: 600px; margin-right: 600px; height: 750px; padding-top: 20px; text-align: center; "
@@ -58,7 +59,8 @@
             </div>
             <div *ngIf="(name.errors && name.touched && name.invalid)" style="padding-bottom: 5px;">
                 <small class="text-danger" *ngIf="name.errors?.['required']">Name is required</small>
-                <small class="text-danger" *ngIf="name.errors?.['pattern']">Name should should contain only alphabets and space</small>
+                <small class="text-danger" *ngIf="name.errors?.['pattern']">Name should should contain only alphabets
+                    and space</small>
                 <small class="text-danger" *ngIf="name.errors?.['minlength'] || name.errors?.['maxlength']">Name must be
                     at least 3-20 characters long</small>
             </div>

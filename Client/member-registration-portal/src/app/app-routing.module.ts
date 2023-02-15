@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: "dependent", component: DependentComponent },
   { path: "claims", component: GetClaimsComponent },
   { path: "submit", component: SubmitClaimComponent },
-  {path: "edit", component: EditMemberComponent}
+  { path: "edit", component: EditMemberComponent }
 ];
 
 @NgModule({

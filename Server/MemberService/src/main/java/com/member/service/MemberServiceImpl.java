@@ -35,7 +35,7 @@ public class MemberServiceImpl implements IMemberService {
 
     @Override
     public Member updateMember(Member member) {
-        Member exisitngMember = memberRepo.findById(member.getMemberId()).orElseThrow(() -> new MemberNotFoundExceptionHandler("Member not found with id: " +member.getMemberId()));
+        Member exisitngMember = memberRepo.findById(member.getMemberId()).orElseThrow(() -> new MemberNotFoundExceptionHandler("Member not found with id: " + member.getMemberId()));
         exisitngMember.setAddress(member.getAddress());
         exisitngMember.setState(member.getState());
         exisitngMember.setEmail(member.getEmail());
@@ -66,7 +66,7 @@ public class MemberServiceImpl implements IMemberService {
 
     @Override
     public Dependent updateDependent(Dependent dependent) {
-        Dependent existingDependent = dependentRepo.findById(dependent.getDependentId()).orElseThrow(() -> new DependentNotFoundExceptionHandler("Member not found with id: " +dependent.getDependentId()));
+        Dependent existingDependent = dependentRepo.findById(dependent.getDependentId()).orElseThrow(() -> new DependentNotFoundExceptionHandler("Member not found with id: " + dependent.getDependentId()));
         existingDependent.setName(dependent.getName());
         existingDependent.setDob(dependent.getDob());
         return dependentRepo.save(existingDependent);

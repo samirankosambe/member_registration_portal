@@ -15,13 +15,13 @@ public class ClaimController {
 
     // Get all claims
     @GetMapping("/claims/{memberName}")
-    public List<Claim> getClaims(@PathVariable String memberName){
+    public List<Claim> getClaims(@PathVariable String memberName) {
         return claimService.getAllClaims(memberName);
     }
 
     // Add a claim
     @PostMapping("/add-claim")
-    public String addClaim(@RequestBody Claim claim){
+    public String addClaim(@RequestBody Claim claim) {
         return claimService.addClaim(claim);
     }
 }

@@ -1,13 +1,10 @@
 package com.member;
 
-import com.member.entity.Dependent;
 import com.member.entity.Member;
 import com.member.models.JWTRequest;
 import com.member.models.JWTResponse;
-import com.member.repository.IDependentRepo;
 import com.member.repository.IMemberRepo;
 import com.member.service.JWTUserService;
-import com.member.service.MemberServiceImpl;
 import com.member.utility.JWTUtility;
 import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.Test;
@@ -17,19 +14,18 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockitoExtension.class)
 public class JWTServiceTest {
@@ -54,7 +50,7 @@ public class JWTServiceTest {
     }
 
     @Test
-    public void loadUserByUsernameSuccessfully(){
+    public void loadUserByUsernameSuccessfully() {
         member = getMember();
         Mockito.when(memberRepo.findByName("Sam")).thenReturn(Optional.of(member));
         UserDetails user = jwtUserService.loadUserByUsername("Sam");
@@ -62,7 +58,7 @@ public class JWTServiceTest {
     }
 
     @Test
-    public void ForNonExistingUserExceptionIsThrown(){
+    public void ForNonExistingUserExceptionIsThrown() {
         member = getMember();
         Mockito.when(memberRepo.findByName("Sam")).thenReturn(Optional.empty());
         assertThrows(UsernameNotFoundException.class, () -> jwtUserService.loadUserByUsername("Sam"));
@@ -82,7 +78,7 @@ public class JWTServiceTest {
     }
 
     @Test
-    public void  authenticateSuccessfully() throws Exception {
+    public void authenticateSuccessfully() throws Exception {
         jwtUserService.authenticate("Sam", "sam123");
         Mockito.verify(authenticationManager).authenticate(new UsernamePasswordAuthenticationToken("Sam", "sam123"));
     }

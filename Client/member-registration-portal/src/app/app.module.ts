@@ -38,9 +38,9 @@ import { EditMemberComponent } from './components/edit-member/edit-member.compon
   ],
   providers: [
     {
-      useClass : AuthInterceptor,
-      provide : HTTP_INTERCEPTORS,
-      multi : true
+      useClass: AuthInterceptor,
+      provide: HTTP_INTERCEPTORS,
+      multi: true
     },
     RegistrationService
   ],

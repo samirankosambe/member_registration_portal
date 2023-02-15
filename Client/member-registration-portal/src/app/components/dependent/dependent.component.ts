@@ -23,11 +23,11 @@ export class DependentComponent {
     this.dependent = this.dependents.find(x => x.dependentId == dependentId);
   }
 
-  setAddDependentFlag(){
+  setAddDependentFlag() {
     this.addDependentFlag = true;
   }
 
-  addDependent(addDependentForm: NgForm){
+  addDependent(addDependentForm: NgForm) {
     this.newDependent = addDependentForm.value;
     this.newDependent.memberName = this.jwtService.getName();
     const promise = this.registrationService.addDependent(this.newDependent);
@@ -42,11 +42,11 @@ export class DependentComponent {
     });
   }
 
-  deleteDependent(dependentId, index:any){
+  deleteDependent(dependentId, index: any) {
     const promise = this.registrationService.deleteDependent(dependentId);
     promise.subscribe((response: any) => {
       this.dependents.splice(index, 1);
-  })
+    })
   }
 
   validate(editDependentForm: NgForm) {

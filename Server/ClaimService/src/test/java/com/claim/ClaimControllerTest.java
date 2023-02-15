@@ -51,8 +51,8 @@ public class ClaimControllerTest {
         assertEquals("0000000001", claimId);
     }
 
-    public  Claim getClaim(){
-        return  new Claim("0000000001", "sam", "Sam", LocalDate.of(1997,11,06), LocalDate.of(2023,02,01), LocalDate.of(2023,02,9), "HDFCLife", 5000);
+    public Claim getClaim() {
+        return new Claim("0000000001", "sam", "Sam", LocalDate.of(1997, 11, 06), LocalDate.of(2023, 02, 01), LocalDate.of(2023, 02, 9), "HDFCLife", 5000);
     }
 
 }

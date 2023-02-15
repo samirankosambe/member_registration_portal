@@ -35,7 +35,8 @@
                 style="height: 36px;">
                 <span class="input-group-text" id="inputGroup-sizing-sm" style="width: 75px;">State</span>
                 <select id="State" name="State" aria-label="Sizing example input" class="form-control"
-                    aria-describedby="inputGroup-sizing-sm" ngmodel #state="ngModel" [(ngModel)]="member.state" required>
+                    aria-describedby="inputGroup-sizing-sm" ngmodel #state="ngModel" [(ngModel)]="member.state"
+                    required>
                     <option *ngFor="let state of states" [value]="state">
                         {{ state }}
                     <option>

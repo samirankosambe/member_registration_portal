@@ -87,7 +87,7 @@ export class SignupComponent implements OnInit {
     });
   }
 
-  onCountryChange(event){
+  onCountryChange(event) {
     var country = event.target.value;
     if (country) {
       this.states = this.countryService.getStatesByCountry(country);
@@ -95,7 +95,7 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  constructor(private registrationService: RegistrationService, private router: Router, private countryService: CountryService) { 
+  constructor(private registrationService: RegistrationService, private router: Router, private countryService: CountryService) {
     this.countries = this.countryService.getCountries();
   }
 

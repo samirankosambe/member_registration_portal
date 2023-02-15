@@ -2,7 +2,6 @@ package com.claim.entity;
 
 import com.claim.generator.ClaimSequenceIdGenerator;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
@@ -26,7 +25,7 @@ public class Claim {
             strategy = "com.claim.generator.ClaimSequenceIdGenerator",
             parameters = {
                     @Parameter(name = ClaimSequenceIdGenerator.INCREMENT_PARAM, value = "50"),
-                    @Parameter(name = ClaimSequenceIdGenerator.NUMBER_FORMAT_PARAMETER, value = "%010d") })
+                    @Parameter(name = ClaimSequenceIdGenerator.NUMBER_FORMAT_PARAMETER, value = "%010d")})
     private String claimId;
     private String name;
     private String memberName;

@@ -12,7 +12,7 @@ export class GetClaimsComponent {
 
   claims: Claim[];
 
-  constructor(private registrationService: RegistrationService, private jwtService: JwtClientService){
+  constructor(private registrationService: RegistrationService, private jwtService: JwtClientService) {
     let memberName = this.jwtService.getName();
     const promise = this.registrationService.getClaims(memberName);
     promise.subscribe((response: any) => {

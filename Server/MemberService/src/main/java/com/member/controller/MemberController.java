@@ -37,20 +37,21 @@ public class MemberController {
     public String addMember(@RequestBody Member member) {
         return memberService.addMember(member);
     }
+
     //Update a member
     @PutMapping("/update-member")
     public Member updateMember(@RequestBody Member member) {
         return memberService.updateMember(member);
     }
 
-    @GetMapping ("/find/{name}")
-    public Member findUserByName(@PathVariable String name){
+    @GetMapping("/find/{name}")
+    public Member findUserByName(@PathVariable String name) {
         return memberService.findByName(name);
     }
 
     //Get all dependent
     @GetMapping("/dependents/{memberName}")
-    public List<Dependent> getDependents(@PathVariable String memberName){
+    public List<Dependent> getDependents(@PathVariable String memberName) {
         return memberService.getAllDependents(memberName);
     }
 
@@ -74,13 +75,13 @@ public class MemberController {
 
     // Get all claims
     @GetMapping("/claims/{memberName}")
-    public List<Claim> getClaims(@PathVariable String memberName){
+    public List<Claim> getClaims(@PathVariable String memberName) {
         return restTemplate.getForObject(BASE_URL + "/claims/" + memberName, List.class);
     }
 
     // Add a claim
     @PostMapping("/add-claim")
-    public String addClaim(@RequestBody Claim claim){
+    public String addClaim(@RequestBody Claim claim) {
         String claimId = restTemplate.postForObject(BASE_URL + "/add-claim", claim, String.class);
         return claimId;
     }
