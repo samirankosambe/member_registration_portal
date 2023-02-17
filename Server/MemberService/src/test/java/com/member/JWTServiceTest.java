@@ -58,18 +58,17 @@ class JWTServiceTest {
     }
 
     @Test
-    void ForNonExistingUserExceptionIsThrown() {
+    void loadUserByUsernameForNonExistingUserExceptionIsThrown() {
         member = getMember();
         Mockito.when(memberRepo.findByName("Sam")).thenReturn(Optional.empty());
         assertThrows(UsernameNotFoundException.class, () -> jwtUserService.loadUserByUsername("Sam"));
     }
 
     @Test
-    void signInSuccessfully() throws Exception {
+    void createJwtTokenSuccessfully() throws Exception {
         member = getMember();
         UserDetails user = new User(member.getName(), member.getPassword(), new ArrayList<>());
         JWTRequest jwtRequest = new JWTRequest("Sam", "sam123");
-        JWTResponse jwtResponse = new JWTResponse("eyJhbGciOiJIUzUxMiJ9", member);
 
         Mockito.when(memberRepo.findByName("Sam")).thenReturn(Optional.of(member));
         Mockito.when(jwtUtility.generateToken(user)).thenReturn("eyJhbGciOiJIUzUxMiJ9");

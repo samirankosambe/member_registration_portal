@@ -47,12 +47,7 @@ public class JWTUserService implements UserDetailsService {
 
         UserDetails userDetails = loadUserByUsername(userName);
         String newGeneratedToken = jwtUtility.generateToken(userDetails);
-
-        if (memberRepo.findByName(userName).isPresent()) {
-            member = memberRepo.findByName(userName).get();
-        } else {
-            throw new UsernameNotFoundException("Member not found with name: " + userName);
-        }
+        member = memberRepo.findByName(userName).get();
         return new JWTResponse(newGeneratedToken, member);
     }
 

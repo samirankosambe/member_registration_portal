@@ -78,6 +78,14 @@ class MemberControllerTest {
     }
 
     @Test
+    void findMemberByNameSuccessfully(){
+        member = getMember();
+        Mockito.when(memberService.findByName("Sam")).thenReturn(member);
+        Member existingMember = memberController.findUserByName("Sam");
+        assertEquals("Sam", existingMember.getName());
+    }
+
+    @Test
     void getAllDependentsSuccessfully() {
         dependent = getDependent();
         List<Dependent> dependents = new ArrayList<>();

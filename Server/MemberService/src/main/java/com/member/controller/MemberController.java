@@ -8,6 +8,9 @@ import com.member.models.JWTResponse;
 import com.member.service.IMemberService;
 import com.member.service.JWTUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.DisabledException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -28,7 +31,7 @@ public class MemberController {
 
     // For Signing in
     @PostMapping("/sign-in")
-    public JWTResponse authenticate(@RequestBody JWTRequest jwtRequest) throws Exception {
+    public JWTResponse authenticate(@RequestBody JWTRequest jwtRequest) throws DisabledException, BadCredentialsException, UsernameNotFoundException {
         return jwtUserService.createJwtToken(jwtRequest);
     }
 
