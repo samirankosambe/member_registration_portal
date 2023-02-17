@@ -26,13 +26,15 @@ public class JWTUserService implements UserDetailsService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    Member member;
+
     @Autowired
     JWTUtility jwtUtility;
 
     @Override
     public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
         if (memberRepo.findByName(name).isPresent()) {
-            Member member = memberRepo.findByName(name).get();
+            member = memberRepo.findByName(name).get();
             return new org.springframework.security.core.userdetails.User(member.getName(), member.getPassword(), new ArrayList<>());
         } else {
             throw new UsernameNotFoundException("Member not found with name: " + name);
@@ -43,11 +45,8 @@ public class JWTUserService implements UserDetailsService {
         String userName = jwtRequest.getUsername();
         String userPassword = jwtRequest.getPassword();
         authenticate(userName, userPassword);
-        Member member;
-
         UserDetails userDetails = loadUserByUsername(userName);
         String newGeneratedToken = jwtUtility.generateToken(userDetails);
-        member = memberRepo.findByName(userName).get();
         return new JWTResponse(newGeneratedToken, member);
     }
 
