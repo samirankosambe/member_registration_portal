@@ -82,7 +82,7 @@ public class MemberController {
     // Add a claim
     @PostMapping("/add-claim")
     public String addClaim(@RequestBody Claim claim) {
-        String claimId = restTemplate.postForObject(BASE_URL + "/add-claim", claim, String.class);
-        return claimId;
+        return restTemplate.postForObject(BASE_URL + "/add-claim", claim, String.class);
+
     }
 }

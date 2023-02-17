@@ -39,25 +39,30 @@ public class JWTUserService implements UserDetailsService {
         }
     }
 
-    public JWTResponse createJwtToken(JWTRequest jwtRequest) throws Exception {
+    public JWTResponse createJwtToken(JWTRequest jwtRequest) throws DisabledException, BadCredentialsException, UsernameNotFoundException {
         String userName = jwtRequest.getUsername();
         String userPassword = jwtRequest.getPassword();
         authenticate(userName, userPassword);
+        Member member;
 
         UserDetails userDetails = loadUserByUsername(userName);
         String newGeneratedToken = jwtUtility.generateToken(userDetails);
 
-        Member member = memberRepo.findByName(userName).get();
+        if (memberRepo.findByName(userName).isPresent()) {
+            member = memberRepo.findByName(userName).get();
+        } else {
+            throw new UsernameNotFoundException("Member not found with name: " + userName);
+        }
         return new JWTResponse(newGeneratedToken, member);
     }
 
-    public void authenticate(String userName, String userPassword) throws Exception {
+    public void authenticate(String userName, String userPassword) throws DisabledException, BadCredentialsException {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userName, userPassword));
         } catch (DisabledException e) {
-            throw new Exception("USER_DISABLED", e);
+            throw new DisabledException("USER_DISABLED", e);
         } catch (BadCredentialsException e) {
-            throw new Exception("INVALID_CREDENTIALS", e);
+            throw new BadCredentialsException("INVALID_CREDENTIALS", e);
         }
     }
 

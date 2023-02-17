@@ -25,7 +25,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
-public class MemberControllerTest {
+class MemberControllerTest {
     @InjectMocks
     MemberController memberController;
 
@@ -52,7 +52,7 @@ public class MemberControllerTest {
     }
 
     @Test
-    public void signInSuccessfully() throws Exception {
+    void signInSuccessfully() throws Exception {
         member = getMember();
         JWTRequest jwtRequest = new JWTRequest("Sam", "sam123");
         JWTResponse jwtResponse = new JWTResponse("eyJhbGciOiJIUzUxMiJ9", member);
@@ -62,14 +62,14 @@ public class MemberControllerTest {
     }
 
     @Test
-    public void signUpSuccessfully() {
+    void signUpSuccessfully() {
         member = getMember();
         Mockito.when(memberService.addMember(member)).thenReturn(member.getMemberId());
         assertEquals("R-001", memberController.addMember(member));
     }
 
     @Test
-    public void updateMemberSuccessfully() {
+    void updateMemberSuccessfully() {
         member = getMember();
         member.setContact("8855050428");
         Mockito.when(memberService.updateMember(member)).thenReturn(member);
@@ -78,7 +78,7 @@ public class MemberControllerTest {
     }
 
     @Test
-    public void getAllDependentsSuccessfully() {
+    void getAllDependentsSuccessfully() {
         dependent = getDependent();
         List<Dependent> dependents = new ArrayList<>();
         dependents.add(dependent);
@@ -88,7 +88,7 @@ public class MemberControllerTest {
     }
 
     @Test
-    public void dependentIsSavedSuccessfully() {
+    void dependentIsSavedSuccessfully() {
         dependent = getDependent();
         Mockito.when(memberService.addDependent(dependent)).thenReturn(dependent.getDependentId());
         long dependentId = memberController.addDependent(dependent);
@@ -96,22 +96,22 @@ public class MemberControllerTest {
     }
 
     @Test
-    public void dependentIsUpdatedSuccessfully() {
+    void dependentIsUpdatedSuccessfully() {
         dependent = getDependent();
         dependent.setName("Jai");
         Mockito.when(memberService.updateDependent(dependent)).thenReturn(dependent);
         Dependent updatedDependent = memberController.updateDependent(dependent);
-        assertEquals("Jai", dependent.getName());
+        assertEquals("Jai", updatedDependent.getName());
     }
 
     @Test
-    public void memberIsDeletedSuccessfully() {
-        memberController.deleteDependent(1l);
-        Mockito.verify(memberService).deleteDependent(1l);
+    void memberIsDeletedSuccessfully() {
+        memberController.deleteDependent(1L);
+        Mockito.verify(memberService).deleteDependent(1L);
     }
 
     @Test
-    public void getAllClaimsSuccessfully() {
+    void getAllClaimsSuccessfully() {
         claim = getClaim();
         List<Claim> claims = new ArrayList<>();
         claims.add(claim);
@@ -122,7 +122,7 @@ public class MemberControllerTest {
     }
 
     @Test
-    public void claimIsSavedSuccessfully() {
+    void claimIsSavedSuccessfully() {
         claim = getClaim();
         Mockito.when(restTemplate.postForObject(BASE_URL + "/add-claim", claim, String.class)).thenReturn(claim.getClaimId());
         String claimId = memberController.addClaim(claim);
@@ -130,14 +130,14 @@ public class MemberControllerTest {
     }
 
     public Member getMember() {
-        return new Member("R-001", "Sam", "Pune", "Maharashtra", "India", "sam@gmail.com", "GXDPK2019B", "8149593575", LocalDate.of(1997, 11, 06), 19, "sam123");
+        return new Member("R-001", "Sam", "Pune", "Maharashtra", "India", "sam@gmail.com", "GXDPK2019B", "8149593575", LocalDate.of(1997, 11, 6), 19, "sam123");
     }
 
     public Dependent getDependent() {
-        return new Dependent(1l, "Sam", "Jay", LocalDate.of(1994, 10, 30));
+        return new Dependent(1L, "Sam", "Jay", LocalDate.of(1994, 10, 30));
     }
 
     public Claim getClaim() {
-        return new Claim("0000000001", "sam", "Sam", LocalDate.of(1997, 11, 06), LocalDate.of(2023, 02, 01), LocalDate.of(2023, 02, 9), "HDFCLife", 5000);
+        return new Claim("0000000001", "sam", "Sam", LocalDate.of(1997, 11, 6), LocalDate.of(2023, 2, 1), LocalDate.of(2023, 2, 9), "HDFCLife", 5000);
     }
 }

@@ -28,7 +28,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockitoExtension.class)
-public class JWTServiceTest {
+class JWTServiceTest {
 
     @InjectMocks
     JWTUserService jwtUserService;
@@ -50,7 +50,7 @@ public class JWTServiceTest {
     }
 
     @Test
-    public void loadUserByUsernameSuccessfully() {
+    void loadUserByUsernameSuccessfully() {
         member = getMember();
         Mockito.when(memberRepo.findByName("Sam")).thenReturn(Optional.of(member));
         UserDetails user = jwtUserService.loadUserByUsername("Sam");
@@ -58,14 +58,14 @@ public class JWTServiceTest {
     }
 
     @Test
-    public void ForNonExistingUserExceptionIsThrown() {
+    void ForNonExistingUserExceptionIsThrown() {
         member = getMember();
         Mockito.when(memberRepo.findByName("Sam")).thenReturn(Optional.empty());
         assertThrows(UsernameNotFoundException.class, () -> jwtUserService.loadUserByUsername("Sam"));
     }
 
     @Test
-    public void signInSuccessfully() throws Exception {
+    void signInSuccessfully() throws Exception {
         member = getMember();
         UserDetails user = new User(member.getName(), member.getPassword(), new ArrayList<>());
         JWTRequest jwtRequest = new JWTRequest("Sam", "sam123");
@@ -78,12 +78,12 @@ public class JWTServiceTest {
     }
 
     @Test
-    public void authenticateSuccessfully() throws Exception {
+    void authenticateSuccessfully() throws Exception {
         jwtUserService.authenticate("Sam", "sam123");
         Mockito.verify(authenticationManager).authenticate(new UsernamePasswordAuthenticationToken("Sam", "sam123"));
     }
 
-    public Member getMember() {
-        return new Member("R-001", "Sam", "Pune", "Maharashtra", "India", "sam@gmail.com", "GXDPK2019B", "8149593575", LocalDate.of(1997, 11, 06), 19, "sam123");
+    Member getMember() {
+        return new Member("R-001", "Sam", "Pune", "Maharashtra", "India", "sam@gmail.com", "GXDPK2019B", "8149593575", LocalDate.of(1997, 11, 6), 19, "sam123");
     }
 }

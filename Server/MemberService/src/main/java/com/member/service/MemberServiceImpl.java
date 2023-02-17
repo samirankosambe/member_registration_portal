@@ -47,7 +47,7 @@ public class MemberServiceImpl implements IMemberService {
 
     @Override
     public Member findByName(String name) {
-        return memberRepo.findByName(name).get();
+        return memberRepo.findByName(name).orElseThrow(() -> new MemberNotFoundExceptionHandler("Member not found with name: " + name));
     }
 
     @Override

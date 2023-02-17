@@ -19,7 +19,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
-public class ClaimControllerTest {
+class ClaimControllerTest {
     @InjectMocks
     ClaimController claimController;
 
@@ -34,7 +34,7 @@ public class ClaimControllerTest {
     }
 
     @Test
-    public void getAllClaimsSuccessfully() {
+    void getAllClaimsSuccessfully() {
         claim = getClaim();
         List<Claim> claims = new ArrayList<>();
         claims.add(claim);
@@ -44,7 +44,7 @@ public class ClaimControllerTest {
     }
 
     @Test
-    public void dependentIsSavedSuccessfully() {
+    void dependentIsSavedSuccessfully() {
         claim = getClaim();
         Mockito.when(claimService.addClaim(claim)).thenReturn(claim.getClaimId());
         String claimId = claimController.addClaim(claim);

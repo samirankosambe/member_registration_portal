@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockitoExtension.class)
-public class MemberServiceTest {
+class MemberServiceTest {
 
     @InjectMocks
     MemberServiceImpl memberService;
@@ -46,7 +46,7 @@ public class MemberServiceTest {
     }
 
     @Test
-    public void memberIsSavedSuccessfully() {
+    void memberIsSavedSuccessfully() {
         member = getMember();
         Mockito.when(memberRepo.findByName("Sam")).thenReturn(Optional.empty());
         Mockito.when(memberRepo.save(member)).thenReturn(member);
@@ -55,14 +55,14 @@ public class MemberServiceTest {
     }
 
     @Test
-    public void forExistingMemberWhenSavingExceptionIsThrown() {
+    void forExistingMemberWhenSavingExceptionIsThrown() {
         member = getMember();
         Mockito.when(memberRepo.findByName("Sam")).thenReturn(Optional.of(member));
         assertThrows(MemberNotFoundExceptionHandler.class, () -> memberService.addMember(member));
     }
 
     @Test
-    public void memberIsUpdatedSuccessfully() {
+    void memberIsUpdatedSuccessfully() {
         member = getMember();
         Mockito.when(memberRepo.findById("R-001")).thenReturn(Optional.of(member));
         member.setContact("8855050428");
@@ -72,14 +72,14 @@ public class MemberServiceTest {
     }
 
     @Test
-    public void forNonExistingMemberWhenUpdatingExceptionIsThrown() {
+    void forNonExistingMemberWhenUpdatingExceptionIsThrown() {
         member = getMember();
         Mockito.when(memberRepo.findById("R-001")).thenReturn(Optional.empty());
         assertThrows(MemberNotFoundExceptionHandler.class, () -> memberService.updateMember(member));
     }
 
     @Test
-    public void getMemberByNameSuccessfully() {
+    void getMemberByNameSuccessfully() {
         member = getMember();
         Mockito.when(memberRepo.findByName("Sam")).thenReturn(Optional.of(member));
         Member existingMember = memberService.findByName("Sam");
@@ -87,7 +87,7 @@ public class MemberServiceTest {
     }
 
     @Test
-    public void getAllDependentsSuccessfully() {
+    void getAllDependentsSuccessfully() {
         dependent = getDependent();
         List<Dependent> dependents = new ArrayList<>();
         dependents.add(dependent);
@@ -97,7 +97,7 @@ public class MemberServiceTest {
     }
 
     @Test
-    public void dependentIsSavedSuccessfully() {
+    void dependentIsSavedSuccessfully() {
         dependent = getDependent();
         Mockito.when(dependentRepo.findByName("Jay")).thenReturn(Optional.empty());
         Mockito.when(dependentRepo.save(dependent)).thenReturn(dependent);
@@ -106,16 +106,16 @@ public class MemberServiceTest {
     }
 
     @Test
-    public void whileSavingExceptionIsThrownForExistingDependent() {
+    void whileSavingExceptionIsThrownForExistingDependent() {
         dependent = getDependent();
         Mockito.when(dependentRepo.findByName("Jay")).thenReturn(Optional.of(dependent));
         assertThrows(DependentNotFoundExceptionHandler.class, () -> memberService.addDependent(dependent));
     }
 
     @Test
-    public void dependentIsUpdatedSuccessfully() {
+    void dependentIsUpdatedSuccessfully() {
         dependent = getDependent();
-        Mockito.when(dependentRepo.findById(1l)).thenReturn(Optional.of(dependent));
+        Mockito.when(dependentRepo.findById(1L)).thenReturn(Optional.of(dependent));
         dependent.setName("Jai");
         Mockito.when(dependentRepo.save(dependent)).thenReturn(dependent);
         Dependent updatedDependent = memberService.updateDependent(dependent);
@@ -123,16 +123,16 @@ public class MemberServiceTest {
     }
 
     @Test
-    public void forNonExistingDependentWhenUpdatingExceptionIsThrown() {
+    void forNonExistingDependentWhenUpdatingExceptionIsThrown() {
         dependent = getDependent();
-        Mockito.when(dependentRepo.findById(1l)).thenReturn(Optional.empty());
+        Mockito.when(dependentRepo.findById(1L)).thenReturn(Optional.empty());
         assertThrows(DependentNotFoundExceptionHandler.class, () -> memberService.updateDependent(dependent));
     }
 
     @Test
-    public void memberIsDeletedSuccessfully() {
-        memberService.deleteDependent(1l);
-        Mockito.verify(dependentRepo).deleteById(1l);
+    void memberIsDeletedSuccessfully() {
+        memberService.deleteDependent(1L);
+        Mockito.verify(dependentRepo).deleteById(1L);
     }
 
     public Member getMember() {
@@ -140,7 +140,7 @@ public class MemberServiceTest {
     }
 
     public Dependent getDependent() {
-        return new Dependent(1l, "R-001", "Jay", LocalDate.of(1994, 10, 30));
+        return new Dependent(1L, "R-001", "Jay", LocalDate.of(1994, 10, 30));
     }
 
 }
